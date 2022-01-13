@@ -1,0 +1,88 @@
+﻿<Window x:Class="SchoolBus_v1._0.Views.MainView"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:SchoolBus_v1._0.Views"
+        mc:Ignorable="d"
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+        Title="MainView" Height="450" Width="800">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="150"/>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+        
+        <!--Navigation-->
+        <StackPanel>
+            <!--Logo Image-->
+            
+            <!--Buttons-->
+            <!--Create Ride-->
+            <Button
+                Style="{StaticResource MaterialDesignPaperButton}"
+                ToolTip="Resource name: MaterialDesignPaperButton"
+                materialDesign:ButtonAssist.CornerRadius="15"  
+                Margin="10,5"
+                Content="Create Ride"
+                IsEnabled="{Binding DataContext.ControlsEnabled, RelativeSource={RelativeSource FindAncestor, AncestorType=Window}}" />
+            <!--Rides-->
+            <Button
+                Style="{StaticResource MaterialDesignPaperButton}"
+                ToolTip="Resource name: MaterialDesignPaperButton"
+                Content="Rides"
+                materialDesign:ButtonAssist.CornerRadius="15"  
+                Margin="10,5"
+                IsEnabled="{Binding DataContext.ControlsEnabled, RelativeSource={RelativeSource FindAncestor, AncestorType=Window}}" />
+            <!--Class-->
+            <Button
+                Style="{StaticResource MaterialDesignPaperButton}"
+                ToolTip="Resource name: MaterialDesignPaperButton"
+                materialDesign:ButtonAssist.CornerRadius="15"  
+                Margin="10,5"
+                Content="Class"
+                IsEnabled="{Binding DataContext.ControlsEnabled, RelativeSource={RelativeSource FindAncestor, AncestorType=Window}}" />
+            <!--Student-->
+            <Button
+                Style="{StaticResource MaterialDesignPaperButton}"
+                ToolTip="Resource name: MaterialDesignPaperButton"
+                Content="Student"
+                materialDesign:ButtonAssist.CornerRadius="15"  
+                Margin="10,5"
+                IsEnabled="{Binding DataContext.ControlsEnabled, RelativeSource={RelativeSource FindAncestor, AncestorType=Window}}" />
+            <!--Parent-->
+            <Button
+                Style="{StaticResource MaterialDesignPaperButton}"
+                ToolTip="Resource name: MaterialDesignPaperButton"
+                Content="Parent"
+                materialDesign:ButtonAssist.CornerRadius="15"  
+                Margin="10,5"
+                IsEnabled="{Binding DataContext.ControlsEnabled, RelativeSource={RelativeSource FindAncestor, AncestorType=Window}}" />
+            <!--Driver-->
+            <Button
+                Style="{StaticResource MaterialDesignPaperButton}"
+                ToolTip="Resource name: MaterialDesignPaperButton"
+                Content="Driver"
+                materialDesign:ButtonAssist.CornerRadius="15"  
+                Margin="10,5"
+                IsEnabled="{Binding DataContext.ControlsEnabled, RelativeSource={RelativeSource FindAncestor, AncestorType=Window}}" />
+            <!--Car-->
+            <Button
+                Style="{StaticResource MaterialDesignPaperButton}"
+                ToolTip="Resource name: MaterialDesignPaperButton"
+                Content="Car"
+                materialDesign:ButtonAssist.CornerRadius="15"  
+                Margin="10,5"
+                IsEnabled="{Binding DataContext.ControlsEnabled, RelativeSource={RelativeSource FindAncestor, AncestorType=Window}}" />
+            <!--Holidays-->
+            <Button
+                 Style="{StaticResource MaterialDesignPaperButton}"
+                 ToolTip="Resource name: MaterialDesignPaperButton"
+                 Content="Holidays"
+                materialDesign:ButtonAssist.CornerRadius="15"  
+                Margin="10,5"
+                IsEnabled="{Binding DataContext.ControlsEnabled, RelativeSource={RelativeSource FindAncestor, AncestorType=Window}}" />
+
+        </StackPanel>
+    </Grid>
+</Window>
