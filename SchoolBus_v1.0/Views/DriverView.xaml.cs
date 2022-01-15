@@ -1,6 +1,4 @@
-﻿using SchoolBus_v1._0.Stores;
-using SchoolBus_v1._0.ViewModels;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -12,22 +10,19 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
+using System.Windows.Navigation;
 using System.Windows.Shapes;
 
 namespace SchoolBus_v1._0.Views
 {
     /// <summary>
-    /// Interaction logic for MainView.xaml
+    /// Interaction logic for DriverView.xaml
     /// </summary>
-    public partial class MainView : Window
+    public partial class DriverView : UserControl
     {
-        public MainView()
+        public DriverView()
         {
             InitializeComponent();
-
-            NavigationStore navigation = new NavigationStore();
-            navigation.SelectedViewModel = new DriverViewModel();
-            DataContext = new MainViewModel(navigation);
         }
     }
 }

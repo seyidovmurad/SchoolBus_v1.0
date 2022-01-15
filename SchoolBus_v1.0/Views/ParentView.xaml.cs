@@ -13,16 +13,16 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace SchoolBus_v1._0
+namespace SchoolBus_v1._0.Views
 {
     /// <summary>
-    /// Interaction logic for MainWindow.xaml
+    /// Interaction logic for ParentView.xaml
     /// </summary>
-    public partial class MainWindow : Window
+    public partial class ParentView : UserControl
     {
-        public MainWindow()
+        public ParentView()
         {
             InitializeComponent();
-        } 
+        }
     }
 }

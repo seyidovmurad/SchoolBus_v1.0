@@ -6,20 +6,21 @@
         xmlns:local="clr-namespace:SchoolBus_v1._0.Views"
         mc:Ignorable="d"
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
-        Title="MainView" Height="450" Width="800">
+        Title="MainView" Height="500" Width="800" MinHeight="500" MinWidth="800">
     <Grid>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="150"/>
+            <ColumnDefinition Width="0.2*" MaxWidth="200"/>
             <ColumnDefinition/>
         </Grid.ColumnDefinitions>
         
         <!--Navigation-->
         <StackPanel>
             <!--Logo Image-->
-            
+
             <!--Buttons-->
             <!--Create Ride-->
             <Button
+                Command="{Binding NavigateCreateRideCommand}"
                 Style="{StaticResource MaterialDesignPaperButton}"
                 ToolTip="Resource name: MaterialDesignPaperButton"
                 materialDesign:ButtonAssist.CornerRadius="15"  
@@ -28,6 +29,7 @@
                 IsEnabled="{Binding DataContext.ControlsEnabled, RelativeSource={RelativeSource FindAncestor, AncestorType=Window}}" />
             <!--Rides-->
             <Button
+                Command="{Binding NavigateRideCommand}"
                 Style="{StaticResource MaterialDesignPaperButton}"
                 ToolTip="Resource name: MaterialDesignPaperButton"
                 Content="Rides"
@@ -36,6 +38,7 @@
                 IsEnabled="{Binding DataContext.ControlsEnabled, RelativeSource={RelativeSource FindAncestor, AncestorType=Window}}" />
             <!--Class-->
             <Button
+                Command="{Binding NavigateClassCommand}"
                 Style="{StaticResource MaterialDesignPaperButton}"
                 ToolTip="Resource name: MaterialDesignPaperButton"
                 materialDesign:ButtonAssist.CornerRadius="15"  
@@ -44,6 +47,7 @@
                 IsEnabled="{Binding DataContext.ControlsEnabled, RelativeSource={RelativeSource FindAncestor, AncestorType=Window}}" />
             <!--Student-->
             <Button
+                Command="{Binding NavigateStudentCommand}"
                 Style="{StaticResource MaterialDesignPaperButton}"
                 ToolTip="Resource name: MaterialDesignPaperButton"
                 Content="Student"
@@ -52,6 +56,7 @@
                 IsEnabled="{Binding DataContext.ControlsEnabled, RelativeSource={RelativeSource FindAncestor, AncestorType=Window}}" />
             <!--Parent-->
             <Button
+                Command="{Binding NavigateParentCommand}"
                 Style="{StaticResource MaterialDesignPaperButton}"
                 ToolTip="Resource name: MaterialDesignPaperButton"
                 Content="Parent"
@@ -60,6 +65,7 @@
                 IsEnabled="{Binding DataContext.ControlsEnabled, RelativeSource={RelativeSource FindAncestor, AncestorType=Window}}" />
             <!--Driver-->
             <Button
+                Command="{Binding NavigateDriverCommand}"
                 Style="{StaticResource MaterialDesignPaperButton}"
                 ToolTip="Resource name: MaterialDesignPaperButton"
                 Content="Driver"
@@ -68,6 +74,7 @@
                 IsEnabled="{Binding DataContext.ControlsEnabled, RelativeSource={RelativeSource FindAncestor, AncestorType=Window}}" />
             <!--Car-->
             <Button
+                Command="{Binding NavigateCarCommand}"
                 Style="{StaticResource MaterialDesignPaperButton}"
                 ToolTip="Resource name: MaterialDesignPaperButton"
                 Content="Car"
@@ -76,6 +83,7 @@
                 IsEnabled="{Binding DataContext.ControlsEnabled, RelativeSource={RelativeSource FindAncestor, AncestorType=Window}}" />
             <!--Holidays-->
             <Button
+                Command="{Binding NavigateHolidaysCommand}"
                  Style="{StaticResource MaterialDesignPaperButton}"
                  ToolTip="Resource name: MaterialDesignPaperButton"
                  Content="Holidays"
@@ -84,5 +92,8 @@
                 IsEnabled="{Binding DataContext.ControlsEnabled, RelativeSource={RelativeSource FindAncestor, AncestorType=Window}}" />
 
         </StackPanel>
+        
+        <!--Content-->
+        <ContentControl Content="{Binding SelectedViewModel}" Grid.Column="1"/>
     </Grid>
 </Window>
