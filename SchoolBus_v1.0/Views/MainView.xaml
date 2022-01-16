@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:SchoolBus_v1._0.Views"
         mc:Ignorable="d"
-        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes" xmlns:modalcontrol="clr-namespace:ModalControl;assembly=ModalControl"
         Title="MainView" Height="500" Width="800" MinHeight="500" MinWidth="800">
     <Grid>
         <Grid.ColumnDefinitions>
@@ -92,7 +92,10 @@
                 IsEnabled="{Binding DataContext.ControlsEnabled, RelativeSource={RelativeSource FindAncestor, AncestorType=Window}}" />
 
         </StackPanel>
-        
+
+        <modalcontrol:Modal Panel.ZIndex="1" Grid.Column="1" IsOpen="{Binding IsOpen}">
+            <ContentControl Content="{Binding AddViewModel}"/>
+        </modalcontrol:Modal>
         <!--Content-->
         <ContentControl Content="{Binding SelectedViewModel}" Grid.Column="1"/>
     </Grid>

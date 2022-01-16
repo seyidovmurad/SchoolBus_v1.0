@@ -15,7 +15,7 @@
         <!--Search Add-->
         <StackPanel Orientation="Horizontal">
             <!--Add-->
-            <Button Background="Transparent" BorderThickness="0">
+            <Button Background="Transparent" BorderThickness="0" Command="{Binding AddDriverCommand}">
                 <Image Source="/Medias/add.png"/>
             </Button>
             <!--Search-->

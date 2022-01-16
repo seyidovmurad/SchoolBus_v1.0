@@ -12,9 +12,11 @@ namespace SchoolBus_v1._0.ViewModels
     public class MainViewModel: BaseViewModel
     {
         private readonly NavigationStore _navigation;
+        private readonly ModalNavigationStore _modalNavigation;
 
         public BaseViewModel SelectedViewModel { get; set; }
 
+        public BaseViewModel AddViewModel { get; set; }
 
         public ICommand NavigateDriverCommand { get; set; }
 
@@ -32,12 +34,18 @@ namespace SchoolBus_v1._0.ViewModels
 
         public ICommand NavigateHolidaysCommand { get; set; }
 
-        public MainViewModel(NavigationStore navigation)
+        public bool IsOpen => _modalNavigation.IsOpen;
+
+        public MainViewModel(NavigationStore navigation, ModalNavigationStore modalNavigation)
         {
             _navigation = navigation;
-            _navigation.SelectedViewModelChanged += OnSelectedViewChanged;
 
-            NavigateDriverCommand = new UpdateViewCommand<DriverViewModel>(_navigation, () => new DriverViewModel());
+            _modalNavigation = modalNavigation;
+
+            _navigation.SelectedViewModelChanged += OnSelectedViewChanged;
+            _modalNavigation.CurrentViewModelChanged += OnModalSelectedViewChanged;
+
+            NavigateDriverCommand = new UpdateViewCommand<DriverViewModel>(_navigation, () => new DriverViewModel(modalNavigation));
             NavigateCarCommand = new UpdateViewCommand<CarViewModel>(_navigation, () => new CarViewModel());
             NavigateStudentCommand = new UpdateViewCommand<StudentViewModel>(_navigation, () => new StudentViewModel());
             NavigateParentCommand = new UpdateViewCommand<ParentViewModel>(_navigation, () => new ParentViewModel());
@@ -47,8 +55,15 @@ namespace SchoolBus_v1._0.ViewModels
             NavigateHolidaysCommand = new UpdateViewCommand<HolidaysViewModel>(_navigation, () => new HolidaysViewModel());
 
             SelectedViewModel = _navigation.SelectedViewModel;
+            AddViewModel = _modalNavigation.CurrentViewModel;
         }
 
+        private void OnModalSelectedViewChanged()
+        {
+            AddViewModel = _modalNavigation.CurrentViewModel;
+            OnPropertyChanged(nameof(AddViewModel));
+            OnPropertyChanged(nameof(IsOpen));
+        }
 
         protected void OnSelectedViewChanged()
         {

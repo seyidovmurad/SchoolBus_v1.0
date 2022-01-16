@@ -40,6 +40,9 @@
             <DataTemplate DataType="{x:Type viewmodels:StudentViewModel}">
                 <views:StudentView/>
             </DataTemplate>
+            <DataTemplate DataType="{x:Type viewmodels:AddDriverViewModel}">
+                <views:AddDriverView/>
+            </DataTemplate>
         </ResourceDictionary>
 
 
