@@ -4,16 +4,20 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:SchoolBus_v1._0.Views"
-             mc:Ignorable="d" 
-             d:DesignHeight="350" d:DesignWidth="300" Background="White">
-    <StackPanel>
-        <TextBox Text="Firstname"/>
-        <TextBox Text="Lastname"/>
-        <TextBox Text="Phone"/>
-        <TextBox Text="Username"/>
-        <TextBox Text="Password"/>
-        <ComboBox/>
-        <TextBox Text="Home Address"/>
-        <TextBox Text="Licence"/>
+             mc:Ignorable="d" Background="White" Height="470" Width="300">
+    <StackPanel Width="300">
+        <TextBlock Text="New Driver" Margin="20,25,15,10" FontFamily="Book Antiqua" FontWeight="Bold" FontSize="16"/>
+        <TextBox Text="Firstname" Margin="20,10"/>
+        <TextBox Text="Lastname" Margin="20,10"/>
+        <TextBox Text="Phone" Margin="20,10"/>
+        <TextBox Text="Username" Margin="20,10"/>
+        <TextBox Text="Password" Margin="20,10"/>
+        <ComboBox Margin="20,10"/>
+        <TextBox Text="Home Address" Margin="20,10"/>
+        <TextBox Text="Licence" Margin="20,10"/>
+        <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Margin="20,10">
+            <Button Content="Ok"/>
+            <Button Content="Cancel"/>
+        </StackPanel>
     </StackPanel>
 </UserControl>
