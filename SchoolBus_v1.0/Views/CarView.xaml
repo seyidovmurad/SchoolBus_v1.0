@@ -22,7 +22,7 @@
             <TextBox Width="200" VerticalAlignment="Center"/>
         </StackPanel>
         <!--List-->
-        <ListBox VerticalContentAlignment="Center" Name="lbEurInsuredType" HorizontalContentAlignment="Center" Grid.Row="1" ItemsSource="{Binding Cars}" FontFamily="Book Antiqua">
+        <ListBox VerticalContentAlignment="Center" Name="lbEurInsuredType" HorizontalContentAlignment="Stretch" Grid.Row="1" ItemsSource="{Binding Cars}" FontFamily="Book Antiqua">
             <ListBox.Template>
                 <ControlTemplate>
                     <DockPanel LastChildFill="True">
