@@ -26,6 +26,20 @@ namespace SchoolBus_v1._0.Data
                 .OnDelete(DeleteBehavior.Cascade);
 
             modelBuilder.Entity<Holiday>();
+
+            modelBuilder.Entity<Student>()
+                .HasOne(s => s.Parent)
+                .WithMany(p => p.Students)
+                .HasForeignKey(s => s.ParentId)
+                .OnDelete(DeleteBehavior.Cascade);
+
+            modelBuilder.Entity<Student>()
+                .HasOne(s => s.Class)
+                .WithMany(c => c.Students)
+                .HasForeignKey(s => s.ClassId)
+                .OnDelete(DeleteBehavior.Cascade);
+
+
         }
     }
 }
