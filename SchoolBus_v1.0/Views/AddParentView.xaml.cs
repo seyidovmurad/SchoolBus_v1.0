@@ -23,6 +23,17 @@ namespace SchoolBus_v1._0.Views
         public AddParentView()
         {
             InitializeComponent();
+            OkBtn.IsEnabled = false;
+        }
+
+        private void Firsttxtb_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            if (string.IsNullOrEmpty(Firsttxtb.Text) || string.IsNullOrEmpty(Lasttxtb.Text) || string.IsNullOrEmpty(Phonetxtb.Text) || string.IsNullOrEmpty(UserTxtb.Text) || string.IsNullOrEmpty(PassTxtb.Text))
+            {
+                OkBtn.IsEnabled = false;
+            }
+            else
+                OkBtn.IsEnabled = true;
         }
     }
 }

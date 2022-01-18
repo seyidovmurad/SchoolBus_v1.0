@@ -1,4 +1,6 @@
-﻿using SchoolBus_v1._0.Commands;
+﻿using Microsoft.EntityFrameworkCore;
+using SchoolBus_v1._0.Commands;
+using SchoolBus_v1._0.Data;
 using SchoolBus_v1._0.Models.Concrete;
 using SchoolBus_v1._0.Services;
 using SchoolBus_v1._0.Stores;
@@ -23,7 +25,9 @@ namespace SchoolBus_v1._0.ViewModels
 
         public CarViewModel(ModalNavigationStore modalNavigation, NavigationStore navigation)
         {
-            Cars = new ObservableCollection<Car>(ManageDataService<Car>.GetAllData());
+
+            AppDbContext context = new();
+            Cars = new ObservableCollection<Car>(context.Cars.Include(c => c.Driver));
 
             AddCarCommand = new AddModelCommand<AddCarViewModel>(modalNavigation, () => new AddCarViewModel(modalNavigation,navigation));
 

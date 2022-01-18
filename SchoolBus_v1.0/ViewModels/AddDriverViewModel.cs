@@ -1,4 +1,5 @@
 ﻿using SchoolBus_v1._0.Commands;
+using SchoolBus_v1._0.Data;
 using SchoolBus_v1._0.Models.Concrete;
 using SchoolBus_v1._0.Services;
 using SchoolBus_v1._0.Stores;
@@ -26,18 +27,26 @@ namespace SchoolBus_v1._0.ViewModels
 
         public AddDriverViewModel(ModalNavigationStore modalNavigation, NavigationStore navigation)
         {
+            AppDbContext context = new();
+
             Cars = new ObservableCollection<Car>(ManageDataService<Car>.GetAllData());
             Driver = new();
             SelectedCar = new();
 
             OkCommand = new DoneCommand<DriverViewModel>(modalNavigation, navigation, () =>
             {
-                ManageDataService<Driver>.AddData(Driver);
+                SelectedCar.Driver = Driver;
+                //Driver.Car = SelectedCar;
+                context.Cars.Update(SelectedCar);
+                context.Add(Driver);
+                context.SaveChanges();
+                //ManageDataService<Driver>.AddData(Driver);
                 return new DriverViewModel(modalNavigation, navigation);
             });
 
             CancelCommand = new DoneCommand<DriverViewModel>(modalNavigation, navigation, () => new DriverViewModel(modalNavigation, navigation));
 
         }
+        
     }
 }

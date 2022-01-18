@@ -17,7 +17,7 @@
         <StackPanel Orientation="Horizontal">
             <!--Add-->
             <Button 
-                Command="{Binding AddCarCommand}"
+                Command="{Binding AddCommand}"
                 Background="Transparent" BorderThickness="0">
                 <Image Source="/Medias/add.png"/>
             </Button>

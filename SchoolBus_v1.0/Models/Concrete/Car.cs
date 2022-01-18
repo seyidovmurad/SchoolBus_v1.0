@@ -15,6 +15,7 @@ namespace SchoolBus_v1._0.Models.Concrete
 
         public int SeatCount { get; set; }
 
+        public int? DriverId { get; set; }
         public virtual Driver? Driver { get; set; }
 
         public override string ToString()

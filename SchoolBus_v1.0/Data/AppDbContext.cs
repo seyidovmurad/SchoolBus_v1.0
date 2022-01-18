@@ -12,47 +12,62 @@ namespace SchoolBus_v1._0.Data
     public class AppDbContext: DbContext
     {
 
-        public AppDbContext()
-        {
-        }
-
-        public virtual DbSet<Car> Cars { get; set; }
-        public virtual DbSet<Driver> Drivers { get; set; }
-        public virtual DbSet<Class> Classes { get; set; }
-        public virtual DbSet<Holiday> Holidays { get; set; }
-        public virtual DbSet<Parent> Parents { get; set; }
-        public virtual DbSet<Student> Students { get; set; }
+        public DbSet<Student> Students { get; set; }
+        public DbSet<Ride> Rides { get; set; }
+        public DbSet<Car> Cars { get; set; }
+        public DbSet<Driver> Drivers { get; set; }
+        public DbSet<RideStudent> RideStudents { get; set; }
+        public DbSet<Parent> Parents { get; set; }
+        public DbSet<Attendance> Attendances { get; set; }
+        public DbSet<Class> Classes { get; set; }
+        public DbSet<Holiday> Holidays { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            //string conStr = ConfigurationManager.ConnectionStrings["conStr"].ConnectionString;
-            optionsBuilder.UseSqlServer("Data Source=DESKTOP-N2G3PVO;Initial Catalog=SchoolBus;Integrated Security=True;");
+            optionsBuilder.UseSqlServer("Data Source=STHQ0118-08;Initial Catalog=SBDB;User ID=admin;Password=admin;");
         }
+
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            modelBuilder.Entity<Driver>()
-                .HasOne(d => d.Car)
-                .WithOne(c => c.Driver)
-                .HasForeignKey<Driver>(d => d.CarId)
+            base.OnModelCreating(modelBuilder);
+            //modelBuilder.Entity<Car>()
+            //    .HasAlternateKey(e => e.Number);
+            modelBuilder.Entity<RideStudent>()
+                .HasOne(rs => rs.Student)
+                .WithMany(s => s.RideStudents)
+                .HasForeignKey(sa => sa.StudentId)
                 .OnDelete(DeleteBehavior.Cascade);
-                
-
-            modelBuilder.Entity<Holiday>();
-
+            modelBuilder.Entity<RideStudent>()
+                .HasOne(rs => rs.Ride)
+                .WithMany(r => r.RideStudents)
+                .HasForeignKey(sa => sa.RideId)
+                .OnDelete(DeleteBehavior.Cascade);
+            modelBuilder.Entity<Ride>()
+                .HasOne(r => r.Driver)
+                .WithMany(d => d.Rides)
+                .HasForeignKey(r => r.DriverId)
+                .OnDelete(DeleteBehavior.Cascade);
+            modelBuilder.Entity<Car>()
+                .HasOne(c => c.Driver)
+                .WithOne(d => d.Car)
+                .HasForeignKey<Car>(c => c.DriverId)
+                .OnDelete(DeleteBehavior.SetNull);
+            modelBuilder.Entity<Attendance>()
+                .HasOne(a => a.Student)
+                .WithMany(s => s.Attendances)
+                .HasForeignKey(a => a.StudentId)
+                .OnDelete(DeleteBehavior.Cascade);
+            modelBuilder.Entity<Student>()
+                .HasOne(s => s.Class)
+                .WithMany(g => g.Students)
+                .HasForeignKey(s => s.ClassId)
+                .OnDelete(DeleteBehavior.NoAction);
             modelBuilder.Entity<Student>()
                 .HasOne(s => s.Parent)
                 .WithMany(p => p.Students)
                 .HasForeignKey(s => s.ParentId)
                 .OnDelete(DeleteBehavior.Cascade);
-
-            modelBuilder.Entity<Student>()
-                .HasOne(s => s.Class)
-                .WithMany(c => c.Students)
-                .HasForeignKey(s => s.ClassId)
-                .OnDelete(DeleteBehavior.Cascade);
-
-
         }
     }
 }

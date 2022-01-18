@@ -47,8 +47,8 @@ namespace SchoolBus_v1._0.ViewModels
 
             NavigateDriverCommand = new UpdateViewCommand<DriverViewModel>(_navigation, () => new DriverViewModel(_modalNavigation, _navigation));
             NavigateCarCommand = new UpdateViewCommand<CarViewModel>(_navigation, () => new CarViewModel(_modalNavigation, _navigation));
-            NavigateStudentCommand = new UpdateViewCommand<StudentViewModel>(_navigation, () => new StudentViewModel());
-            NavigateParentCommand = new UpdateViewCommand<ParentViewModel>(_navigation, () => new ParentViewModel());
+            NavigateStudentCommand = new UpdateViewCommand<StudentViewModel>(_navigation, () => new StudentViewModel(_modalNavigation, _navigation));
+            NavigateParentCommand = new UpdateViewCommand<ParentViewModel>(_navigation, () => new ParentViewModel(_modalNavigation, _navigation));
             NavigateCreateRideCommand = new UpdateViewCommand<CreateRideViewModel>(_navigation, () => new CreateRideViewModel());
             NavigateRideCommand = new UpdateViewCommand<RideViewModel>(_navigation, () => new RideViewModel());
             NavigateClassCommand = new UpdateViewCommand<ClassViewModel>(_navigation, () => new ClassViewModel());

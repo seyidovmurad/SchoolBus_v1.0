@@ -11,7 +11,7 @@ namespace SchoolBus_v1._0.Models.Concrete
     {
         public int ParentId { get; set; }
 
-        public int ClassId { get; set; }
+        public int? ClassId { get; set; }
 
         public string FirstName { get; set; }
 
@@ -25,5 +25,9 @@ namespace SchoolBus_v1._0.Models.Concrete
         public Class Class { get; set; }
 
         public Parent Parent { get; set; }
+
+        public virtual List<RideStudent> RideStudents { get; set; }
+        public virtual List<Attendance> Attendances { get; set; }
+
     }
 }

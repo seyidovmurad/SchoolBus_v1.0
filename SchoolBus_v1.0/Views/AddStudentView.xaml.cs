@@ -23,6 +23,22 @@ namespace SchoolBus_v1._0.Views
         public AddStudentView()
         {
             InitializeComponent();
+            OkBtn.IsEnabled = true;
+        }
+
+        private void Firsttxtb_TextChanged(object sender, TextChangedEventArgs e)
+        {
+
+        }
+
+        private void RideCmb_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+
+        }
+
+        private void foo()
+        {
+
         }
     }
 }

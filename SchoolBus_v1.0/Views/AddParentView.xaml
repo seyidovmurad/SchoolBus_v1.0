@@ -10,33 +10,38 @@
     <StackPanel Width="300">
         <TextBlock Text="New Parent" Margin="20,25,15,10" FontFamily="Book Antiqua" FontWeight="Bold" FontSize="16"/>
         <TextBox 
-            x:Name="b"
+            x:Name="Firsttxtb"
             materialDesign:HintAssist.Hint="Firstname"
             Style="{StaticResource MaterialDesignFloatingHintTextBox}"
-            Text="{Binding Car.Name}" Margin="20,5" />
+            Text="{Binding Parent.FirstName}" Margin="20,5"
+            TextChanged="Firsttxtb_TextChanged" />
 
         <TextBox 
-            x:Name="a"
+            x:Name="Lasttxtb"
             materialDesign:HintAssist.Hint="Lastname"
             Style="{StaticResource MaterialDesignFloatingHintTextBox}"
-            Text="{Binding Car.Name}" Margin="20,5"/>
+            Text="{Binding Parent.LastName}" Margin="20,5"
+            TextChanged="Firsttxtb_TextChanged"/>
 
         <TextBox 
-            x:Name="d"
+            x:Name="Phonetxtb"
             materialDesign:HintAssist.Hint="Phone"
             Style="{StaticResource MaterialDesignFloatingHintTextBox}"
-            Text="{Binding Car.Name}" Margin="20,5"/>
+            Text="{Binding Parent.Phone}" Margin="20,5"
+            TextChanged="Firsttxtb_TextChanged"/>
         
         <TextBox 
-            x:Name="NumberTxtb"
+            x:Name="UserTxtb"
             materialDesign:HintAssist.Hint="Username"
             Style="{StaticResource MaterialDesignFloatingHintTextBox}"
-            Text="{Binding Car.Number}" Margin="20,5"/>
+            Text="{Binding Parent.Username}" Margin="20,5"
+            TextChanged="Firsttxtb_TextChanged"/>
         <TextBox 
-            x:Name="SeatTxtb"
+            x:Name="PassTxtb"
             materialDesign:HintAssist.Hint="Password"
             Style="{StaticResource MaterialDesignFloatingHintTextBox}"
-            Text="{Binding Car.SeatCount}" Margin="20,5"/>
+            Text="{Binding Parent.Password}" Margin="20,5"
+            TextChanged="Firsttxtb_TextChanged"/>
         <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Margin="20,10">
             <Button 
                 x:Name="OkBtn"

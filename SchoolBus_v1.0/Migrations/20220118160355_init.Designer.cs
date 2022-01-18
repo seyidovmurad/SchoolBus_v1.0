@@ -10,7 +10,7 @@ using SchoolBus_v1._0.Data;
 namespace SchoolBus_v1._0.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20220117135906_init")]
+    [Migration("20220118160355_init")]
     partial class init
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -21,12 +21,42 @@ namespace SchoolBus_v1._0.Migrations
                 .HasAnnotation("ProductVersion", "5.0.13")
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
+            modelBuilder.Entity("SchoolBus_v1._0.Models.Concrete.Attendance", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<DateTimeOffset>("Date")
+                        .HasColumnType("datetimeoffset");
+
+                    b.Property<string>("Destination")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("StudentId")
+                        .HasColumnType("int");
+
+                    b.Property<bool>("WillAttend")
+                        .HasColumnType("bit");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("StudentId");
+
+                    b.ToTable("Attendances");
+                });
+
             modelBuilder.Entity("SchoolBus_v1._0.Models.Concrete.Car", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<int?>("DriverId")
+                        .HasColumnType("int");
 
                     b.Property<string>("Name")
                         .IsRequired()
@@ -40,6 +70,10 @@ namespace SchoolBus_v1._0.Migrations
                         .HasColumnType("int");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("DriverId")
+                        .IsUnique()
+                        .HasFilter("[DriverId] IS NOT NULL");
 
                     b.ToTable("Cars");
                 });
@@ -66,9 +100,6 @@ namespace SchoolBus_v1._0.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<int>("CarId")
-                        .HasColumnType("int");
 
                     b.Property<string>("FirstName")
                         .IsRequired()
@@ -99,9 +130,6 @@ namespace SchoolBus_v1._0.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("CarId")
-                        .IsUnique();
 
                     b.ToTable("Drivers");
                 });
@@ -153,6 +181,53 @@ namespace SchoolBus_v1._0.Migrations
                     b.ToTable("Parents");
                 });
 
+            modelBuilder.Entity("SchoolBus_v1._0.Models.Concrete.Ride", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<int>("DriverId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Type")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("DriverId");
+
+                    b.ToTable("Rides");
+                });
+
+            modelBuilder.Entity("SchoolBus_v1._0.Models.Concrete.RideStudent", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<int>("RideId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Status")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("StudentId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("RideId");
+
+                    b.HasIndex("StudentId");
+
+                    b.ToTable("RideStudents");
+                });
+
             modelBuilder.Entity("SchoolBus_v1._0.Models.Concrete.Student", b =>
                 {
                     b.Property<int>("Id")
@@ -160,7 +235,8 @@ namespace SchoolBus_v1._0.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<int>("ClassId")
+                    b.Property<int?>("ClassId")
+                        .IsRequired()
                         .HasColumnType("int");
 
                     b.Property<string>("FirstName")
@@ -190,15 +266,55 @@ namespace SchoolBus_v1._0.Migrations
                     b.ToTable("Students");
                 });
 
-            modelBuilder.Entity("SchoolBus_v1._0.Models.Concrete.Driver", b =>
+            modelBuilder.Entity("SchoolBus_v1._0.Models.Concrete.Attendance", b =>
                 {
-                    b.HasOne("SchoolBus_v1._0.Models.Concrete.Car", "Car")
-                        .WithOne("Driver")
-                        .HasForeignKey("SchoolBus_v1._0.Models.Concrete.Driver", "CarId")
+                    b.HasOne("SchoolBus_v1._0.Models.Concrete.Student", "Student")
+                        .WithMany("Attendances")
+                        .HasForeignKey("StudentId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("Car");
+                    b.Navigation("Student");
+                });
+
+            modelBuilder.Entity("SchoolBus_v1._0.Models.Concrete.Car", b =>
+                {
+                    b.HasOne("SchoolBus_v1._0.Models.Concrete.Driver", "Driver")
+                        .WithOne("Car")
+                        .HasForeignKey("SchoolBus_v1._0.Models.Concrete.Car", "DriverId")
+                        .OnDelete(DeleteBehavior.SetNull);
+
+                    b.Navigation("Driver");
+                });
+
+            modelBuilder.Entity("SchoolBus_v1._0.Models.Concrete.Ride", b =>
+                {
+                    b.HasOne("SchoolBus_v1._0.Models.Concrete.Driver", "Driver")
+                        .WithMany("Rides")
+                        .HasForeignKey("DriverId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Driver");
+                });
+
+            modelBuilder.Entity("SchoolBus_v1._0.Models.Concrete.RideStudent", b =>
+                {
+                    b.HasOne("SchoolBus_v1._0.Models.Concrete.Ride", "Ride")
+                        .WithMany("RideStudents")
+                        .HasForeignKey("RideId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("SchoolBus_v1._0.Models.Concrete.Student", "Student")
+                        .WithMany("RideStudents")
+                        .HasForeignKey("StudentId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Ride");
+
+                    b.Navigation("Student");
                 });
 
             modelBuilder.Entity("SchoolBus_v1._0.Models.Concrete.Student", b =>
@@ -206,7 +322,7 @@ namespace SchoolBus_v1._0.Migrations
                     b.HasOne("SchoolBus_v1._0.Models.Concrete.Class", "Class")
                         .WithMany("Students")
                         .HasForeignKey("ClassId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
 
                     b.HasOne("SchoolBus_v1._0.Models.Concrete.Parent", "Parent")
@@ -220,19 +336,33 @@ namespace SchoolBus_v1._0.Migrations
                     b.Navigation("Parent");
                 });
 
-            modelBuilder.Entity("SchoolBus_v1._0.Models.Concrete.Car", b =>
-                {
-                    b.Navigation("Driver");
-                });
-
             modelBuilder.Entity("SchoolBus_v1._0.Models.Concrete.Class", b =>
                 {
                     b.Navigation("Students");
                 });
 
+            modelBuilder.Entity("SchoolBus_v1._0.Models.Concrete.Driver", b =>
+                {
+                    b.Navigation("Car");
+
+                    b.Navigation("Rides");
+                });
+
             modelBuilder.Entity("SchoolBus_v1._0.Models.Concrete.Parent", b =>
                 {
                     b.Navigation("Students");
+                });
+
+            modelBuilder.Entity("SchoolBus_v1._0.Models.Concrete.Ride", b =>
+                {
+                    b.Navigation("RideStudents");
+                });
+
+            modelBuilder.Entity("SchoolBus_v1._0.Models.Concrete.Student", b =>
+                {
+                    b.Navigation("Attendances");
+
+                    b.Navigation("RideStudents");
                 });
 #pragma warning restore 612, 618
         }

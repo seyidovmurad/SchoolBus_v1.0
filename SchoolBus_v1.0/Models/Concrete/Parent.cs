@@ -20,5 +20,10 @@ namespace SchoolBus_v1._0.Models.Concrete
         public string Password { get; set; }
 
         public List<Student> Students { get; set; }
+
+        public override string ToString()
+        {
+            return $"{this.LastName} {this.FirstName}";
+        }
     }
 }

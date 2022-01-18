@@ -23,10 +23,13 @@ namespace SchoolBus_v1._0.Models.Concrete
 
         public string License { get; set; }
 
-        public int CarId { get; set; }
+        public Car? Car { get; set; }
 
-        public virtual Car Car { get; set; }
-
+        public virtual List<Ride> Rides { get; set; }
+        public override string ToString()
+        {
+            return $"{this.LastName} {this.FirstName}";
+        }
 
     }
 }

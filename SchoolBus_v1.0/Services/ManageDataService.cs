@@ -1,4 +1,5 @@
-﻿using SchoolBus_v1._0.Data;
+﻿using Microsoft.EntityFrameworkCore;
+using SchoolBus_v1._0.Data;
 using SchoolBus_v1._0.Models.Abstract;
 using System;
 using System.Collections.Generic;
