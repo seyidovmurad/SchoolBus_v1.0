@@ -4,20 +4,74 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:SchoolBus_v1._0.Views"
+             xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
              mc:Ignorable="d" Background="White" Height="470" Width="300">
     <StackPanel Width="300">
         <TextBlock Text="New Driver" Margin="20,25,15,10" FontFamily="Book Antiqua" FontWeight="Bold" FontSize="16"/>
-        <TextBox Text="Firstname" Margin="20,10"/>
-        <TextBox Text="Lastname" Margin="20,10"/>
-        <TextBox Text="Phone" Margin="20,10"/>
-        <TextBox Text="Username" Margin="20,10"/>
-        <TextBox Text="Password" Margin="20,10"/>
-        <ComboBox Margin="20,10"/>
-        <TextBox Text="Home Address" Margin="20,10"/>
-        <TextBox Text="Licence" Margin="20,10"/>
+        <TextBox 
+            x:Name="FirstTxtb"
+            materialDesign:HintAssist.Hint="FirstName"
+            Style="{StaticResource MaterialDesignFloatingHintTextBox}" 
+            Text="{Binding Driver.FirstName}" Margin="20,5" 
+            TextChanged="FirstTxtb_TextChanged"/>
+        
+        <TextBox 
+            x:Name="LastTxtb"
+            materialDesign:HintAssist.Hint="LastName"
+            Style="{StaticResource MaterialDesignFloatingHintTextBox}"
+            Text="{Binding Driver.LastName}" Margin="20,5"
+            TextChanged="FirstTxtb_TextChanged"/>
+        
+        <TextBox 
+            x:Name="PhoneTxtb"
+            materialDesign:HintAssist.Hint="Phone"
+            Style="{StaticResource MaterialDesignFloatingHintTextBox}"
+            Text="{Binding Driver.Phone}" Margin="20,5"
+            TextChanged="FirstTxtb_TextChanged"/>
+        
+        <TextBox 
+            x:Name="UserTxtb"
+            materialDesign:HintAssist.Hint="Username"
+            Style="{StaticResource MaterialDesignFloatingHintTextBox}"
+            Text="{Binding Driver.Username}" Margin="20,5"
+            TextChanged="FirstTxtb_TextChanged"/>
+        
+        <TextBox 
+            x:Name="PasswordTxtb"
+            materialDesign:HintAssist.Hint="Password"
+            Style="{StaticResource MaterialDesignFloatingHintTextBox}"
+            Text="{Binding Driver.Password}" Margin="20,5"
+            TextChanged="FirstTxtb_TextChanged"/>
+        
+        <ComboBox 
+            Name="CarCmb"
+            materialDesign:HintAssist.Hint="Car"
+            SelectedValue="{Binding Path=SelectedCar}"
+            ItemsSource="{Binding Path=Cars}"
+            Margin="20,5" SelectionChanged="CarCmb_SelectionChanged"/>
+        
+        <TextBox 
+            x:Name="HomeTxtb"
+            materialDesign:HintAssist.Hint="Home Address"
+            Style="{StaticResource MaterialDesignFloatingHintTextBox}"
+            Text="{Binding Driver.HomeAddress}" Margin="20,5"
+            TextChanged="FirstTxtb_TextChanged"/>
+        
+        <TextBox 
+            x:Name="LicenseTxtb"
+            materialDesign:HintAssist.Hint="License"
+            Style="{StaticResource MaterialDesignFloatingHintTextBox}"
+            Text="{Binding Driver.License}" Margin="20,5"
+            TextChanged="FirstTxtb_TextChanged"/>
         <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Margin="20,10">
-            <Button Content="Ok"/>
-            <Button Content="Cancel"/>
+            <Button 
+                x:Name="OkBtn"
+                Command="{Binding OkCommand}"
+                Content="Ok"/>
+            <Button 
+                x:Name="CancelBtn"
+                Command="{Binding CancelCommand}"
+                Content="Cancel"/>
         </StackPanel>
     </StackPanel>
 </UserControl>

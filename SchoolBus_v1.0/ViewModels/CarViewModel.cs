@@ -1,36 +1,33 @@
-﻿using SchoolBus_v1._0.Models.Concrete;
+﻿using SchoolBus_v1._0.Commands;
+using SchoolBus_v1._0.Models.Concrete;
+using SchoolBus_v1._0.Services;
+using SchoolBus_v1._0.Stores;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Input;
 
 namespace SchoolBus_v1._0.ViewModels
 {
     public class CarViewModel: BaseViewModel
     {
+        private readonly ModalNavigationStore _modalNavigation;
 
+        private readonly NavigationStore _navigation;
         public ObservableCollection<Car> Cars { get; set; }
 
-        public CarViewModel()
-        {
-            Cars = new ObservableCollection<Car>();
+        public ICommand AddCarCommand { get; set; }
 
-            Cars.Add(new Car
-            {
-                Name = "Audi Q7",
-                Number = "02de433",
-                SeatCount = 4,
-                Driver = new Driver
-                {
-                    FirstName = "Murad",
-                    LastName = "Seyidov",
-                    Username = "smurad",
-                    Phone = "055-270-01-75",
-                    License = "90BD231"
-                }
-            });
+        public CarViewModel(ModalNavigationStore modalNavigation, NavigationStore navigation)
+        {
+            Cars = new ObservableCollection<Car>(ManageDataService<Car>.GetAllData());
+
+            AddCarCommand = new AddModelCommand<AddCarViewModel>(modalNavigation, () => new AddCarViewModel(modalNavigation,navigation));
+
+            
         }
     }
 }

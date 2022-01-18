@@ -23,6 +23,25 @@ namespace SchoolBus_v1._0.Views
         public AddDriverView()
         {
             InitializeComponent();
+            OkBtn.IsEnabled = false;
+        }
+
+        private void FirstTxtb_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            foo();
+        }
+
+        private void foo()
+        {
+            if (string.IsNullOrEmpty(FirstTxtb.Text) || string.IsNullOrEmpty(LastTxtb.Text) || string.IsNullOrEmpty(PhoneTxtb.Text) || string.IsNullOrEmpty(PasswordTxtb.Text) || string.IsNullOrEmpty(UserTxtb.Text) || string.IsNullOrEmpty(HomeTxtb.Text) || string.IsNullOrEmpty(LicenseTxtb.Text) || CarCmb.SelectedItem == null)
+                OkBtn.IsEnabled = false;
+            else
+                OkBtn.IsEnabled = true;
+        }
+
+        private void CarCmb_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            foo();
         }
     }
 }

@@ -4,9 +4,83 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:SchoolBus_v1._0.Views"
+             xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
              mc:Ignorable="d" 
-             d:DesignHeight="450" d:DesignWidth="800">
+             d:DesignHeight="450" d:DesignWidth="800" Background="White">
     <Grid>
-            
+        <Grid.RowDefinitions>
+            <RowDefinition Height="40"/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+
+        <!--Search Add-->
+        <StackPanel Orientation="Horizontal">
+            <!--Add-->
+            <Button 
+                Command="{Binding AddCarCommand}"
+                Background="Transparent" BorderThickness="0">
+                <Image Source="/Medias/add.png"/>
+            </Button>
+            <!--Search-->
+            <TextBox materialDesign:HintAssist.Hint="Search" Width="200" VerticalAlignment="Center"/>
+        </StackPanel>
+        <!--List-->
+        <ListBox VerticalContentAlignment="Center" Name="lbEurInsuredType" HorizontalContentAlignment="Stretch" Grid.Row="1" ItemsSource="{Binding Parents}" FontFamily="Book Antiqua">
+            <ListBox.Template>
+                <ControlTemplate>
+                    <DockPanel LastChildFill="True">
+                        <Border DockPanel.Dock="Top" Height="30" BorderBrush="Black" BorderThickness="0,0,0,0.5" >
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition/>
+                                    <ColumnDefinition/>
+                                    <ColumnDefinition/>
+                                    <ColumnDefinition/>
+                                    <ColumnDefinition/>
+                                    <ColumnDefinition/>
+                                </Grid.ColumnDefinitions>
+                                <Label FontFamily="Georgia" FontWeight="Bold" FontSize="10" Grid.Column="0">Id</Label>
+                                <Label FontFamily="Georgia" FontWeight="Bold" FontSize="10" Grid.Column="1">FirstName</Label>
+                                <Label FontFamily="Georgia" FontWeight="Bold" FontSize="10" Grid.Column="2">LastName</Label>
+                                <Label FontFamily="Georgia" FontWeight="Bold" FontSize="10" Grid.Column="3">Username</Label>
+                                <Label FontFamily="Georgia" FontWeight="Bold" FontSize="10" Grid.Column="4">Phone</Label>
+                                <Label FontFamily="Georgia" FontWeight="Bold" FontSize="10" Grid.Column="5">Action</Label>
+                            </Grid>
+                        </Border>
+                        <ItemsPresenter></ItemsPresenter>
+                    </DockPanel>
+                </ControlTemplate>
+            </ListBox.Template>
+            <ListBox.ItemTemplate>
+                <DataTemplate>
+                    <Grid Margin="0,2"  >
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition/>
+                            <ColumnDefinition/>
+                            <ColumnDefinition/>
+                            <ColumnDefinition/>
+                            <ColumnDefinition/>
+                            <ColumnDefinition/>
+                        </Grid.ColumnDefinitions>
+                        <TextBlock Grid.Column="0" Text="{Binding Id}"/>
+                        <TextBlock Grid.Column="1" Text="{Binding FirstName}"/>
+                        <TextBlock Grid.Column="2" Text="{Binding LastName}"/>
+                        <TextBlock Grid.Column="3" Text="{Binding UserName}"/>
+                        <TextBlock Grid.Column="4" Text="{Binding Phone}"/>
+                        <!--Action-->
+                        <StackPanel Orientation="Horizontal" Grid.Column="6" HorizontalAlignment="Center" VerticalAlignment="Center">
+                            <!--Edit-->
+                            <Button Background="Transparent" BorderThickness="0" Height="25">
+                                <Image Source="/Medias/edit.png" Stretch="Fill"/>
+                            </Button>
+                            <!--Delete-->
+                            <Button Background="Transparent" BorderThickness="0" Height="25">
+                                <Image Source="/Medias/garbage.png" Stretch="Fill"/>
+                            </Button>
+                        </StackPanel>
+                    </Grid>
+                </DataTemplate>
+            </ListBox.ItemTemplate>
+        </ListBox>
     </Grid>
 </UserControl>

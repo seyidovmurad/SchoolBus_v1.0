@@ -25,7 +25,7 @@ namespace SchoolBus_v1._0.Models.Concrete
 
         public int CarId { get; set; }
 
-        public Car Car { get; set; }
+        public virtual Car Car { get; set; }
 
 
     }

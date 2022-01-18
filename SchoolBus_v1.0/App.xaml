@@ -43,6 +43,18 @@
             <DataTemplate DataType="{x:Type viewmodels:AddDriverViewModel}">
                 <views:AddDriverView/>
             </DataTemplate>
+            <DataTemplate DataType="{x:Type viewmodels:AddCarViewModel}">
+                <views:AddCarView/>
+            </DataTemplate>
+            <DataTemplate DataType="{x:Type viewmodels:AddParentViewModel}">
+                <views:AddParentView/>
+            </DataTemplate>
+            <DataTemplate DataType="{x:Type viewmodels:AddClassViewModel}">
+                <views:AddClassView/>
+            </DataTemplate>
+            <DataTemplate DataType="{x:Type viewmodels:AddStudentViewModel}">
+                <views:AddStudentView/>
+            </DataTemplate>
         </ResourceDictionary>
 
 

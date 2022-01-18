@@ -27,7 +27,7 @@ namespace SchoolBus_v1._0.Views
 
             NavigationStore navigation = new NavigationStore();
             ModalNavigationStore navigationStore = new ModalNavigationStore();
-            navigation.SelectedViewModel = new DriverViewModel(navigationStore);
+            navigation.SelectedViewModel = new DriverViewModel(navigationStore, navigation);
             DataContext = new MainViewModel(navigation, navigationStore);
         }
     }

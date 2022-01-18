@@ -1,0 +1,42 @@
+﻿<UserControl x:Class="SchoolBus_v1._0.Views.AddCarView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:SchoolBus_v1._0.Views"
+             xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+             mc:Ignorable="d" 
+             d:DesignHeight="270" d:DesignWidth="300" Background="White">
+    <StackPanel Width="300">
+        <TextBlock Text="New Car" Margin="20,25,15,10" FontFamily="Book Antiqua" FontWeight="Bold" FontSize="16"/>
+        <TextBox 
+            x:Name="NameTxtb"
+            materialDesign:HintAssist.Hint="Name"
+            Style="{StaticResource MaterialDesignFloatingHintTextBox}"
+            Text="{Binding Car.Name}" Margin="20,5" 
+            TextChanged="NameTxtb_TextChanged"/>
+        
+        <TextBox 
+            x:Name="NumberTxtb"
+            materialDesign:HintAssist.Hint="Number"
+            Style="{StaticResource MaterialDesignFloatingHintTextBox}"
+            Text="{Binding Car.Number}" Margin="20,5"
+            TextChanged="NameTxtb_TextChanged"/>
+        <TextBox 
+            x:Name="SeatTxtb"
+            materialDesign:HintAssist.Hint="SeatCount"
+            Style="{StaticResource MaterialDesignFloatingHintTextBox}"
+            Text="{Binding Car.SeatCount}" Margin="20,5"
+            TextChanged="NameTxtb_TextChanged" PreviewTextInput="SeatTxtb_PreviewTextInput"/>
+        <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Margin="20,10">
+            <Button 
+                x:Name="OkBtn"
+                Command="{Binding OkCommand}"
+                Content="Ok" Click="OkBtn_Click"/>
+            <Button 
+                x:Name="CancelBtn"
+                Command="{Binding CancelCommand}"
+                Content="Cancel"/>
+        </StackPanel>
+    </StackPanel>
+</UserControl>

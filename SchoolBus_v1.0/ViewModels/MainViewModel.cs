@@ -45,8 +45,8 @@ namespace SchoolBus_v1._0.ViewModels
             _navigation.SelectedViewModelChanged += OnSelectedViewChanged;
             _modalNavigation.CurrentViewModelChanged += OnModalSelectedViewChanged;
 
-            NavigateDriverCommand = new UpdateViewCommand<DriverViewModel>(_navigation, () => new DriverViewModel(modalNavigation));
-            NavigateCarCommand = new UpdateViewCommand<CarViewModel>(_navigation, () => new CarViewModel());
+            NavigateDriverCommand = new UpdateViewCommand<DriverViewModel>(_navigation, () => new DriverViewModel(_modalNavigation, _navigation));
+            NavigateCarCommand = new UpdateViewCommand<CarViewModel>(_navigation, () => new CarViewModel(_modalNavigation, _navigation));
             NavigateStudentCommand = new UpdateViewCommand<StudentViewModel>(_navigation, () => new StudentViewModel());
             NavigateParentCommand = new UpdateViewCommand<ParentViewModel>(_navigation, () => new ParentViewModel());
             NavigateCreateRideCommand = new UpdateViewCommand<CreateRideViewModel>(_navigation, () => new CreateRideViewModel());

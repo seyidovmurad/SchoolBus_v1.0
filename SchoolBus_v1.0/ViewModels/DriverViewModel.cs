@@ -1,5 +1,6 @@
 ﻿using SchoolBus_v1._0.Commands;
 using SchoolBus_v1._0.Models.Concrete;
+using SchoolBus_v1._0.Services;
 using SchoolBus_v1._0.Stores;
 using System;
 using System.Collections.Generic;
@@ -13,36 +14,18 @@ namespace SchoolBus_v1._0.ViewModels
 {
     public class DriverViewModel: BaseViewModel
     {
-        private ModalNavigationStore _navigationStore;
 
         public ObservableCollection<Driver> Drivers { get; set; }
 
         public ICommand AddDriverCommand { get; set; }
 
-        public DriverViewModel(ModalNavigationStore navigationStore)
+        public DriverViewModel(ModalNavigationStore modalNavigation, NavigationStore navigation)
         {
 
-            _navigationStore = navigationStore;
+            Drivers = new ObservableCollection<Driver>(ManageDataService<Driver>.GetAllData());
 
-            AddDriverCommand = new AddModelCommand<AddDriverViewModel>(_navigationStore, () => new AddDriverViewModel());
+            AddDriverCommand = new AddModelCommand<AddDriverViewModel>(modalNavigation, () => new AddDriverViewModel(modalNavigation, navigation));
 
-            Drivers = new ObservableCollection<Driver>();
-
-            Drivers.Add(new Driver
-            {
-                FirstName = "Murad",
-                LastName = "Seyidov",
-                Username = "smurad",
-                Phone = "055-270-01-75",
-                License = "90BD231",
-                Car = new Car
-                {
-                    Name = "Audi Q7",
-                    Number = "02de433",
-                    SeatCount = 4,
-                    Driver = new Driver()
-                }
-            });
         }
 
     }
