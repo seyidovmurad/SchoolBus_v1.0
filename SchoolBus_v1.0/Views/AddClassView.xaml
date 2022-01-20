@@ -8,12 +8,12 @@
              mc:Ignorable="d" 
              d:DesignHeight="190" d:DesignWidth="300" Background="White">
     <StackPanel Width="300">
-        <TextBlock Text="New Class" Margin="20,25,15,10" FontFamily="Book Antiqua" FontWeight="Bold" FontSize="16"/>
+        <TextBlock Text="{Binding Title}" Margin="20,25,15,10" FontFamily="Book Antiqua" FontWeight="Bold" FontSize="16"/>
         <TextBox 
             x:Name="NameTxtb"
             materialDesign:HintAssist.Hint="Class Name"
             Style="{StaticResource MaterialDesignFloatingHintTextBox}"
-            Text="{Binding Car.Name}" Margin="20,5" 
+            Text="{Binding Class.Name}" Margin="20,5" TextChanged="NameTxtb_TextChanged" 
             />
 
         <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Margin="20,30">

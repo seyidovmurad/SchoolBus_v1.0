@@ -16,7 +16,7 @@
         <!--Navigation-->
         <StackPanel>
             <!--Logo Image-->
-
+            <Image Source="/Medias/logo.png" Margin="20,15,20,30"/>
             <!--Buttons-->
             <!--Create Ride-->
             <Button

@@ -33,7 +33,7 @@ namespace SchoolBus_v1._0.Views
 
         private void foo()
         {
-            if (string.IsNullOrEmpty(FirstTxtb.Text) || string.IsNullOrEmpty(LastTxtb.Text) || string.IsNullOrEmpty(PhoneTxtb.Text) || string.IsNullOrEmpty(PasswordTxtb.Text) || string.IsNullOrEmpty(UserTxtb.Text) || string.IsNullOrEmpty(HomeTxtb.Text) || string.IsNullOrEmpty(LicenseTxtb.Text) || CarCmb.SelectedItem == null)
+            if (string.IsNullOrEmpty(FirstTxtb.Text) || string.IsNullOrEmpty(LastTxtb.Text) || string.IsNullOrEmpty(PhoneTxtb.Text) || string.IsNullOrEmpty(PasswordTxtb.Text) || string.IsNullOrEmpty(UserTxtb.Text) || string.IsNullOrEmpty(HomeTxtb.Text) || string.IsNullOrEmpty(LicenseTxtb.Text) )
                 OkBtn.IsEnabled = false;
             else
                 OkBtn.IsEnabled = true;

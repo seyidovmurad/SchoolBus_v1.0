@@ -21,32 +21,67 @@ namespace SchoolBus_v1._0.ViewModels
 
         public Car SelectedCar { get; set; }
 
+        public string Title { get; set; }
 
         public ICommand OkCommand { get; set; }
         public ICommand CancelCommand { get; set; }
 
         public AddDriverViewModel(ModalNavigationStore modalNavigation, NavigationStore navigation)
         {
+            Title = "New Driver";
             AppDbContext context = new();
-
-            Cars = new ObservableCollection<Car>(ManageDataService<Car>.GetAllData());
+            Cars = new ObservableCollection<Car>(context.Cars.Where(c => c.Driver == null));
             Driver = new();
-            SelectedCar = new();
 
             OkCommand = new DoneCommand<DriverViewModel>(modalNavigation, navigation, () =>
             {
-                SelectedCar.Driver = Driver;
-                //Driver.Car = SelectedCar;
-                context.Cars.Update(SelectedCar);
+                if (SelectedCar != null)
+                {
+                    SelectedCar.Driver = Driver;
+                    context.Cars.Update(SelectedCar);
+                }
                 context.Add(Driver);
                 context.SaveChanges();
-                //ManageDataService<Driver>.AddData(Driver);
                 return new DriverViewModel(modalNavigation, navigation);
             });
 
             CancelCommand = new DoneCommand<DriverViewModel>(modalNavigation, navigation, () => new DriverViewModel(modalNavigation, navigation));
 
         }
-        
+
+        public AddDriverViewModel(ModalNavigationStore modalNavigation, NavigationStore navigation, Driver driver)
+        {
+            AppDbContext context = new();
+            Title = "Update Driver";
+            Cars = new ObservableCollection<Car>(context.Cars.Where(c => c.Driver == null));
+            Driver = driver;
+            if (driver.Car != null)
+            {
+                SelectedCar = driver.Car;
+                Cars.Add(SelectedCar);
+            }
+            else
+                SelectedCar = new();
+
+            OkCommand = new DoneCommand<DriverViewModel>(modalNavigation, navigation, () =>
+            {
+                if(SelectedCar != driver.Car)
+                {
+                    SelectedCar.Driver = driver;
+                    if (driver.Car != null)
+                    {
+                        driver.Car.Driver = null;
+                        context.Update(driver.Car);
+                    }
+                    context.Update(SelectedCar);
+                    context.SaveChanges();
+                }
+                ManageDataService<Driver>.Update(driver);
+                return new DriverViewModel(modalNavigation, navigation);
+            });
+
+            CancelCommand = new DoneCommand<DriverViewModel>(modalNavigation, navigation, () => new DriverViewModel(modalNavigation, navigation));
+
+        }
     }
 }

@@ -3,10 +3,193 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
              xmlns:local="clr-namespace:SchoolBus_v1._0.Views"
+             xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+             
              mc:Ignorable="d" 
-             d:DesignHeight="450" d:DesignWidth="800">
+             d:DesignHeight="450" d:DesignWidth="800" Background="White">
     <Grid>
-            
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+            <ColumnDefinition Width="3*"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+        
+        <!--Ride Info-->
+        <StackPanel Grid.RowSpan="2" Margin="10,30">
+            <TextBlock Text="Ride" FontFamily="Arial" FontWeight="Bold" FontSize="18"/>
+            <StackPanel Orientation="Horizontal" Margin="0,11">
+                <TextBlock Text="Fullname: " FontFamily="Arial"/>
+                <TextBlock Text="{Binding Selected}" FontFamily="Arial"/>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal" Margin="0,11">
+                <TextBlock Text="Car Name: " FontFamily="Arial"/>
+                <TextBlock Text="{Binding Selected.Car.Name}" FontFamily="Arial"/>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal" Margin="0,11">
+                <TextBlock Text="Car Number: " FontFamily="Arial"/>
+                <TextBlock Text="{Binding Selected.Car.Number}" FontFamily="Arial"/>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal" Margin="0,11">
+                <TextBlock Text="Student Attend: " FontFamily="Arial"/>
+                <TextBlock x:Name="CountTxtb" Text="{Binding StudentCount}" FontFamily="Arial"/>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal" Margin="0,11">
+                <TextBlock Text="Max Seat: " FontFamily="Arial"/>
+                <TextBlock Text="{Binding Selected.Car.SeatCount}" FontFamily="Arial"/>
+            </StackPanel>
+            <ComboBox 
+                Name="DriverCmb"
+                materialDesign:HintAssist.Hint="Driver"
+                ItemsSource="{Binding Drivers}"
+                SelectedItem="{Binding Selected}"
+                Margin="0,5" SelectionChanged="DriverCmb_SelectionChanged">
+            </ComboBox>
+            <Button x:Name="CreateBtn" Content="Create" HorizontalAlignment="Right" Command="{Binding CreateCommand}"/>
+        </StackPanel>
+        
+        <!--Student Remove-->
+        <Grid Grid.Row="0" Grid.Column="1">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="40"/>
+                <RowDefinition/>
+            </Grid.RowDefinitions>
+
+            <!--Search Add-->
+            <StackPanel Orientation="Horizontal">
+                <!--Search-->
+                <TextBox materialDesign:HintAssist.Hint="Search" Width="200" VerticalAlignment="Center"/>
+            </StackPanel>
+            <!--List-->
+            <ScrollViewer Grid.Row="1">
+                <ListBox VerticalContentAlignment="Center" Name="lbEurInsuredType" HorizontalContentAlignment="Stretch" Grid.Row="1" ItemsSource="{Binding StudentRemove}" FontFamily="Book Antiqua" SelectedItem="{Binding SelectedStu}">
+                    <ListBox.ItemContainerStyle>
+                        <Style TargetType="ListBoxItem">
+                            <Style.Triggers>
+                                <Trigger Property="IsMouseOver" Value="True">
+                                    <Setter Property="IsSelected" Value="True"/>
+                                </Trigger>
+                            </Style.Triggers>
+                        </Style>
+                    </ListBox.ItemContainerStyle>
+                    <ListBox.Template>
+                        <ControlTemplate>
+                            <DockPanel LastChildFill="True">
+                                <Border DockPanel.Dock="Top" Height="30" BorderBrush="Black" BorderThickness="0,0,0,0.5" >
+                                    <Grid>
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition/>
+                                            <ColumnDefinition/>
+                                            <ColumnDefinition/>
+                                            <ColumnDefinition/>
+                                            <ColumnDefinition/>
+                                        </Grid.ColumnDefinitions>
+                                        <Label FontFamily="Georgia" FontWeight="Bold" FontSize="10" Grid.Column="0">FirstName</Label>
+                                        <Label FontFamily="Georgia" FontWeight="Bold" FontSize="10" Grid.Column="1">LastName</Label>
+                                        <Label FontFamily="Georgia" FontWeight="Bold" FontSize="10" Grid.Column="2">Parent</Label>
+                                        <Label FontFamily="Georgia" FontWeight="Bold" FontSize="10" Grid.Column="3">Class</Label>
+                                        <Label FontFamily="Georgia" FontWeight="Bold" FontSize="10" Grid.Column="4">Remove</Label>
+                                    </Grid>
+                                </Border>
+                                <ItemsPresenter></ItemsPresenter>
+                            </DockPanel>
+                        </ControlTemplate>
+                    </ListBox.Template>
+                    <ListBox.ItemTemplate>
+                        <DataTemplate>
+                            <Grid Margin="0,2">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition/>
+                                    <ColumnDefinition/>
+                                    <ColumnDefinition/>
+                                    <ColumnDefinition/>
+                                    <ColumnDefinition/>
+                                    <ColumnDefinition/>
+                                </Grid.ColumnDefinitions>
+                                <TextBlock Grid.Column="0" Text="{Binding FirstName}"/>
+                                <TextBlock Grid.Column="1" Text="{Binding LastName}"/>
+                                <TextBlock Grid.Column="2" Text="{Binding Parent}"/>
+                                <TextBlock HorizontalAlignment="Center" Grid.Column="3" Text="{Binding Class}"/>
+                                <!--Action-->
+                                <StackPanel Margin="50,0,0,0" Orientation="Horizontal" Grid.Column="4" HorizontalAlignment="Center" VerticalAlignment="Center">
+                                    <!--Delete-->
+                                    <Button Background="Transparent" BorderThickness="0" Height="25"
+                                    Command="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type ListBox}, AncestorLevel=1}, Path=DataContext.DeleteCommand}">
+                                        <Image Source="/Medias/garbage.png" Stretch="Fill"/>
+                                    </Button>
+                                </StackPanel>
+                            </Grid>
+                        </DataTemplate>
+                    </ListBox.ItemTemplate>
+                </ListBox>
+            </ScrollViewer>
+        </Grid>
+        <!--Student Add-->
+        <ScrollViewer Grid.Column="1" Grid.Row="1" >
+            <ListBox VerticalContentAlignment="Center" Name="lbEurInsured" HorizontalContentAlignment="Stretch"  ItemsSource="{Binding StudentAdd}" FontFamily="Book Antiqua" SelectedItem="{Binding SelectedStu}" >
+                <ListBox.ItemContainerStyle>
+                    <Style TargetType="ListBoxItem">
+                        <Style.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter Property="IsSelected" Value="True"/>
+                            </Trigger>
+                        </Style.Triggers>
+                    </Style>
+                </ListBox.ItemContainerStyle>
+                <ListBox.Template>
+                    <ControlTemplate>
+                        <DockPanel LastChildFill="True">
+                            <Border DockPanel.Dock="Top" Height="30" BorderBrush="Black" BorderThickness="0,0,0,0.5" >
+                                <Grid>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition/>
+                                        <ColumnDefinition/>
+                                        <ColumnDefinition/>
+                                        <ColumnDefinition/>
+                                        <ColumnDefinition/>
+                                    </Grid.ColumnDefinitions>
+                                    <Label FontFamily="Georgia" FontWeight="Bold" FontSize="10" Grid.Column="0">FirstName</Label>
+                                    <Label FontFamily="Georgia" FontWeight="Bold" FontSize="10" Grid.Column="1">LastName</Label>
+                                    <Label FontFamily="Georgia" FontWeight="Bold" FontSize="10" Grid.Column="2">Parent</Label>
+                                    <Label FontFamily="Georgia" FontWeight="Bold" FontSize="10" Grid.Column="3">Class</Label>
+                                    <Label FontFamily="Georgia" FontWeight="Bold" FontSize="10" Grid.Column="4">Add</Label>
+                                </Grid>
+                            </Border>
+                            <ItemsPresenter></ItemsPresenter>
+                        </DockPanel>
+                    </ControlTemplate>
+                </ListBox.Template>
+                <ListBox.ItemTemplate>
+                    <DataTemplate>
+                        <Grid Margin="0,2"  >
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition/>
+                                <ColumnDefinition/>
+                                <ColumnDefinition/>
+                                <ColumnDefinition/>
+                                <ColumnDefinition/>
+                                <ColumnDefinition/>
+                            </Grid.ColumnDefinitions>
+                            <TextBlock Grid.Column="0" Text="{Binding FirstName}"/>
+                            <TextBlock Grid.Column="1" Text="{Binding LastName}"/>
+                            <TextBlock Grid.Column="2" Text="{Binding Parent}"/>
+                            <TextBlock HorizontalAlignment="Center" Grid.Column="3" Text="{Binding Class}"/>
+                            <!--Action-->
+                            <StackPanel Margin="50,0,0,0" Orientation="Horizontal" Grid.Column="4" HorizontalAlignment="Center" VerticalAlignment="Center">
+                                <!--Delete-->
+                                <Button Background="Transparent" BorderThickness="0" Height="25"
+                                    Command="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type ListBox}, AncestorLevel=1}, Path=DataContext.AddCommand}">
+                                    <Image Source="/Medias/add.png" Stretch="Fill"/>
+                                </Button>
+                            </StackPanel>
+                        </Grid>
+                    </DataTemplate>
+                </ListBox.ItemTemplate>
+            </ListBox>
+        </ScrollViewer>
     </Grid>
 </UserControl>

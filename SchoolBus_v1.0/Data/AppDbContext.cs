@@ -24,7 +24,7 @@ namespace SchoolBus_v1._0.Data
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseSqlServer("Data Source=STHQ0118-08;Initial Catalog=SBDB;User ID=admin;Password=admin;");
+            optionsBuilder.UseSqlServer("Data Source=DESKTOP-N2G3PVO;Initial Catalog=SBDB;Integrated Security = True;");
         }
 
 
@@ -62,7 +62,7 @@ namespace SchoolBus_v1._0.Data
                 .HasOne(s => s.Class)
                 .WithMany(g => g.Students)
                 .HasForeignKey(s => s.ClassId)
-                .OnDelete(DeleteBehavior.NoAction);
+                .OnDelete(DeleteBehavior.SetNull);
             modelBuilder.Entity<Student>()
                 .HasOne(s => s.Parent)
                 .WithMany(p => p.Students)

@@ -22,10 +22,19 @@
                 <Image Source="/Medias/add.png"/>
             </Button>
             <!--Search-->
-            <TextBox materialDesign:HintAssist.Hint="Search" Width="200" VerticalAlignment="Center"/>
+            <TextBox Text="{Binding Search, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" materialDesign:HintAssist.Hint="Search" Width="200" VerticalAlignment="Center"/>
         </StackPanel>
         <!--List-->
-        <ListBox VerticalContentAlignment="Center" Name="lbEurInsuredType" HorizontalContentAlignment="Stretch" Grid.Row="1" ItemsSource="{Binding Students}" FontFamily="Book Antiqua">
+        <ListBox VerticalContentAlignment="Center" Name="lbEurInsuredType" HorizontalContentAlignment="Stretch" Grid.Row="1" ItemsSource="{Binding Students}" FontFamily="Book Antiqua" SelectedItem="{Binding Selected}">
+            <ListBox.ItemContainerStyle>
+                <Style TargetType="ListBoxItem">
+                    <Style.Triggers>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter Property="IsSelected" Value="True"/>
+                        </Trigger>
+                    </Style.Triggers>
+                </Style>
+            </ListBox.ItemContainerStyle>
             <ListBox.Template>
                 <ControlTemplate>
                     <DockPanel LastChildFill="True">
@@ -63,15 +72,17 @@
                         <TextBlock Grid.Column="0" Text="{Binding FirstName}"/>
                         <TextBlock Grid.Column="1" Text="{Binding LastName}"/>
                         <TextBlock Grid.Column="2" Text="{Binding Parent}"/>
-                        <TextBlock Grid.Column="3" Text="{Binding Class}"/>
+                        <TextBlock HorizontalAlignment="Center" Grid.Column="3" Text="{Binding Class}"/>
                         <!--Action-->
-                        <StackPanel Orientation="Horizontal" Grid.Column="4" HorizontalAlignment="Center" VerticalAlignment="Center">
+                        <StackPanel Margin="50,0,0,0" Orientation="Horizontal" Grid.Column="4" HorizontalAlignment="Center" VerticalAlignment="Center">
                             <!--Edit-->
-                            <Button Background="Transparent" BorderThickness="0" Height="25">
+                            <Button Background="Transparent" BorderThickness="0" Height="25"
+                                    Command="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type ListBox}, AncestorLevel=1}, Path=DataContext.UpdateCommand}">
                                 <Image Source="/Medias/edit.png" Stretch="Fill"/>
                             </Button>
                             <!--Delete-->
-                            <Button Background="Transparent" BorderThickness="0" Height="25">
+                            <Button Background="Transparent" BorderThickness="0" Height="25"
+                                    Command="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type ListBox}, AncestorLevel=1}, Path=DataContext.DeleteCommand}">
                                 <Image Source="/Medias/garbage.png" Stretch="Fill"/>
                             </Button>
                         </StackPanel>

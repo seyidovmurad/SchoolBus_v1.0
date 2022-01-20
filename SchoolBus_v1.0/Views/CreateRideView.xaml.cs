@@ -23,6 +23,15 @@ namespace SchoolBus_v1._0.Views
         public CreateRideView()
         {
             InitializeComponent();
+            CreateBtn.IsEnabled = false;
+        }
+
+        private void DriverCmb_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            if (DriverCmb.SelectedItem == null)
+                CreateBtn.IsEnabled = false;
+            else
+                CreateBtn.IsEnabled = true;
         }
     }
 }

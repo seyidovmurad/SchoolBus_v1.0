@@ -8,7 +8,7 @@
              mc:Ignorable="d" 
                  d:DesignHeight="360" d:DesignWidth="300" Background="White">
     <StackPanel Width="300">
-        <TextBlock Text="New Parent" Margin="20,25,15,10" FontFamily="Book Antiqua" FontWeight="Bold" FontSize="16"/>
+        <TextBlock Text="{Binding Title}" Margin="20,25,15,10" FontFamily="Book Antiqua" FontWeight="Bold" FontSize="16"/>
         <TextBox 
             x:Name="Firsttxtb"
             materialDesign:HintAssist.Hint="Firstname"
@@ -34,7 +34,7 @@
             x:Name="UserTxtb"
             materialDesign:HintAssist.Hint="Username"
             Style="{StaticResource MaterialDesignFloatingHintTextBox}"
-            Text="{Binding Parent.Username}" Margin="20,5"
+            Text="{Binding Parent.UserName}" Margin="20,5"
             TextChanged="Firsttxtb_TextChanged"/>
         <TextBox 
             x:Name="PassTxtb"

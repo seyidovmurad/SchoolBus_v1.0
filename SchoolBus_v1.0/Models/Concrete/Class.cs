@@ -12,5 +12,10 @@ namespace SchoolBus_v1._0.Models.Concrete
         public string Name { get; set; }
 
         public virtual List<Student> Students { get; set; }
+
+        public override string ToString()
+        {
+            return $"{Name}";
+        }
     }
 }

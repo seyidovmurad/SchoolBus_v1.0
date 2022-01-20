@@ -23,6 +23,15 @@ namespace SchoolBus_v1._0.Views
         public AddClassView()
         {
             InitializeComponent();
+            OkBtn.IsEnabled = false;
+        }
+
+        private void NameTxtb_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            if (string.IsNullOrEmpty(NameTxtb.Text))
+                OkBtn.IsEnabled = false;
+            else
+                OkBtn.IsEnabled = true;
         }
     }
 }

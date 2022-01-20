@@ -8,7 +8,7 @@
              mc:Ignorable="d" 
              d:DesignHeight="270" d:DesignWidth="300" Background="White">
     <StackPanel Width="300">
-        <TextBlock Text="New Car" Margin="20,25,15,10" FontFamily="Book Antiqua" FontWeight="Bold" FontSize="16"/>
+        <TextBlock Text="{Binding Title}" Margin="20,25,15,10" FontFamily="Book Antiqua" FontWeight="Bold" FontSize="16"/>
         <TextBox 
             x:Name="NameTxtb"
             materialDesign:HintAssist.Hint="Name"

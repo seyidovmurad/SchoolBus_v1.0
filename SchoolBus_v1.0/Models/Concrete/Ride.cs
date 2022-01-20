@@ -9,7 +9,7 @@ namespace SchoolBus_v1._0.Models.Concrete
 {
     public class Ride : Entity
     {
-        public string Type { get; set; }
+        public string Type { get; set; } = "home";
         public Driver Driver { get; set; }
         public int DriverId { get; set; }
         public virtual List<RideStudent> RideStudents { get; set; }

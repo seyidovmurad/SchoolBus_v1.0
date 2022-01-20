@@ -12,7 +12,7 @@ namespace SchoolBus_v1._0.Services
     public static class ManageDataService<T> where T: Entity
     {
 
-        public static List<T> GetAllData()
+        public static List<T> Read()
         {
             AppDbContext context = new AppDbContext();
 
@@ -27,5 +27,18 @@ namespace SchoolBus_v1._0.Services
             context.SaveChanges();
         }
 
+        public static void Update(T data)
+        {
+            AppDbContext context = new AppDbContext();
+            context.Update(data);
+            context.SaveChanges();
+        }
+
+        public static void Remove(T data)
+        {
+            AppDbContext context = new AppDbContext();
+            context.Remove(data);
+            context.SaveChanges();
+        }
     }
 }

@@ -39,7 +39,7 @@ namespace SchoolBus_v1._0.Views
 
         private void NameTxtb_TextChanged(object sender, TextChangedEventArgs e)
         {
-            if (string.IsNullOrEmpty(NameTxtb.Text) || string.IsNullOrEmpty(NumberTxtb.Text) || string.IsNullOrEmpty(SeatTxtb.Text))
+            if (string.IsNullOrEmpty(NameTxtb.Text) || string.IsNullOrEmpty(NumberTxtb.Text) || string.IsNullOrEmpty(SeatTxtb.Text) || Convert.ToInt32(SeatTxtb.Text) < 10)
             {
                 OkBtn.IsEnabled = false;
             }

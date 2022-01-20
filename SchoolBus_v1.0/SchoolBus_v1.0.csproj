@@ -12,6 +12,7 @@
     <None Remove="Medias\add.png" />
     <None Remove="Medias\edit.png" />
     <None Remove="Medias\garbage.png" />
+    <None Remove="Medias\logo.png" />
   </ItemGroup>
 
   <ItemGroup>
@@ -30,6 +31,7 @@
     <Resource Include="Medias\add.png" />
     <Resource Include="Medias\edit.png" />
     <Resource Include="Medias\garbage.png" />
+    <Resource Include="Medias\logo.png" />
   </ItemGroup>
 
   <ItemGroup>

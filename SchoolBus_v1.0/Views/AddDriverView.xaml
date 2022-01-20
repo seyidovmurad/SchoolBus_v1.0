@@ -7,7 +7,7 @@
              xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
              mc:Ignorable="d" Background="White" Height="470" Width="300">
     <StackPanel Width="300">
-        <TextBlock Text="New Driver" Margin="20,25,15,10" FontFamily="Book Antiqua" FontWeight="Bold" FontSize="16"/>
+        <TextBlock Text="{Binding Title}" Margin="20,25,15,10" FontFamily="Book Antiqua" FontWeight="Bold" FontSize="16"/>
         <TextBox 
             x:Name="FirstTxtb"
             materialDesign:HintAssist.Hint="FirstName"
